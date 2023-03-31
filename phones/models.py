@@ -9,3 +9,4 @@ class Phone(models.Model):
     lte_exists  = models.BooleanField(null=False)
     slug = models.SlugField(max_length=200, null=False)
     pass
+

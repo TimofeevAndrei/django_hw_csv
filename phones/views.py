@@ -8,11 +8,20 @@ def index(request):
 
 
 def show_catalog(request):
-    list_phone = Phone.objects.all()
+    sort_value = request.GET.get('sort')
     template = 'catalog.html'
+    if sort_value == 'min_price':
+        phone = Phone.objects.order_by('price')
+    elif sort_value == 'max_price':
+        phone = Phone.objects.order_by('-price')
+    elif sort_value == 'name':
+        phone = Phone.objects.order_by('name')
+    elif sort_value == None:
+        phone = Phone.objects.order_by('id')
     context = {
-        'phones': list_phone,
-    }
+        'phones': phone,
+     }
+
     return render(request, template, context)
 
 
